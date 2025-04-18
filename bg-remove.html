@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImageTooling | Professional Background Removal Tool</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #a29bfe;
+            --dark-color: #2d3436;
+            --light-color: #f5f6fa;
+            --success-color: #00b894;
+            --warning-color: #fdcb6e;
+            --error-color: #d63031;
+            --popular-color: #ff7675;
+            --bg-color: #f5f6fa;
+            --text-color: #2d3436;
+            --card-bg: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #f5f6fa;
+            --card-bg: #2d2d2d;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --dark-color: #f5f6fa;
+            --light-color: #2d2d2d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px var(--shadow-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+                .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px 0;
+          position: relative;
+        }
+.nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px; /* Space between toggle and menu */
+        }
+           .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-right: auto;
+            z-index: 1001;
+                position: relative;/* Pushes everything else to the right */
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .cta-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .cta-button:hover {
+            background-color: #5649c0;
+            color: white;
+        }
+
+/* Mobile menu button - always visible on mobile */
+        .mobile-menu {
+            display: none; /* Hidden by default on desktop */
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-color);
+            background: none;
+            border: none;
+            padding: 5px;
+            margin-left: 15px;
+        }
+        
+                @media (max-width: 992px) {
+            .mobile-menu {
+                display: block; /* Show on mobile */
+                order: 3; /* Far right position */
+            }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--text-color);
+            margin-right: 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--light-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-color);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        /* Upload Section */
+        .upload-section {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            padding: 40px;
+            margin: -50px auto 80px;
+            max-width: 900px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .upload-container {
+            border: 2px dashed var(--secondary-color);
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .upload-container:hover {
+            border-color: var(--primary-color);
+        }
+
+        .upload-container.drag-over {
+            border-color: var(--success-color);
+            background-color: rgba(0, 184, 148, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 60px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .upload-text h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .upload-text p {
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        .browse-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .browse-button:hover {
+            background-color: #5649c0;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        /* Preview Section */
+        .preview-section {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .preview-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            color: var(--dark-color);
+        }
+
+        .preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .preview-box {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 3px 10px var(--shadow-color);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .preview-box h3 {
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+
+        .image-preview {
+            width: 100%;
+            height: 300px;
+            object-fit: contain;
+            border-radius: 5px;
+            background-color: var(--light-color);
+            margin-bottom: 15px;
+        }
+
+        .download-btn {
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .download-btn:hover {
+            background-color: #00a383;
+        }
+
+        .download-btn i {
+            margin-right: 8px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: var(--card-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--text-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px var(--shadow-color);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--text-color);
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+            background-color: var(--bg-color);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px var(--shadow-color);
+            background-color: var(--card-bg);
+        }
+
+        .faq-question {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            color: var(--primary-color);
+        }
+
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+            color: var(--text-color);
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 20px 20px;
+        }
+
+        .faq-icon {
+            color: var(--primary-color);
+            margin-right: 15px;
+            font-size: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--light-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #b2bec3;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #4a5355;
+            color: #b2bec3;
+            font-size: 14px;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            margin: 20px auto;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--dark-color);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px var(--shadow-color);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.error {
+            background-color: var(--error-color);
+        }
+
+        .toast.success {
+            background-color: var(--success-color);
+        }
+
+        /* Popup Styles */
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .popup.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-content {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-color);
+            background: none;
+            border: none;
+        }
+
+        .popup-back {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--primary-color);
+            background: none;
+            border: none;
+        }
+
+        .popup-title {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        /* Pricing Popup */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .pricing-card {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background-color: var(--popular-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .pricing-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+
+        .price {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .price span {
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-color);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .pricing-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--light-color);
+            color: var(--text-color);
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features li i {
+            color: var(--success-color);
+            margin-right: 10px;
+        }
+
+        .pricing-btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .primary-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+
+        .primary-btn:hover {
+            background-color: #5649c0;
+        }
+
+        .secondary-btn {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .secondary-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* How It Works Popup */
+        .steps-container {
+            margin-top: 30px;
+        }
+
+        .step {
+            display: flex;
+            margin-bottom: 30px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .step-content p {
+            color: var(--text-color);
+        }
+
+        /* Features Popup */
+        .features-popup-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .feature-popup-card {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 25px;
+            transition: all 0.3s;
+        }
+
+        .feature-popup-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px var(--shadow-color);
+        }
+
+        .feature-popup-icon {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .feature-popup-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .feature-popup-card p {
+            color: var(--text-color);
+            font-size: 15px;
+        }
+
+        /* Builder Credit */
+        .builder-credit {
+            text-align: center;
+            margin: 40px auto;
+            padding: 15px;
+            max-width: 300px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+            color: #666;
+            font-size: 14px;
+        }
+        .builder-name {
+            font-weight: 600;
+            color: darkcyan;
+            margin-top: 5px;
+            display: block;
+            font-size: 15px;
+        }
+        
+        /* Dark mode adaptation */
+        [data-theme="dark"] .builder-credit {
+            color: #aaa;
+            border-color: #444;
+        }
+        [data-theme="dark"] .builder-name {
+            color: #a29bfe;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: var(--card-bg);
+                flex-direction: column;
+                padding: 80px 30px 30px;
+                box-shadow: 2px 0 10px var(--shadow-color);
+                transition: all 0.3s;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+                margin-left: 0;
+            }
+
+                    .mobile-menu {
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-color);
+            margin-left: 0; /* Remove default margin */
+        }
+
+                    .theme-toggle {
+          background: none;
+          border: none;
+          font-size: 20px;
+          cursor: pointer;
+          color: var(--text-color);
+          order: 1;
+        }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .upload-section {
+                padding: 20px;
+            }
+
+            .upload-container {
+                padding: 30px 20px;
+            }
+
+            .preview-container {
+                flex-direction: column;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .popup-content {
+                width: 95%;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 150px 0 80px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .feature-card {
+                padding: 20px;
+            }
+
+            .feature-card h3 {
+                font-size: 20px;
+            }
+
+            .pricing-card {
+                padding: 20px;
+            }
+
+            .price {
+                font-size: 30px;
+            }
+
+            .step {
+                flex-direction: column;
+            }
+
+            .step-number {
+                margin-bottom: 15px;
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <nav class="navbar">
+          <!-- Logo on far left -->
+          <a href="#" class="logo">
+            <i class="fas fa-magic"></i>
+            ImageTooling
+          </a>
+          
+          <!-- Right-aligned controls -->
+          <div class="nav-right">
+            <button class="theme-toggle" id="themeToggle">
+              <i class="fas fa-moon"></i>
+            </button>
+            <button class="mobile-menu" id="mobileMenu">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+          
+          <!-- [Rest of your nav-links remains the same] -->
+          <ul class="nav-links" id="navLinks">
+            <li><a href="#">Home</a></li>
+            <li><a href="#" id="featuresLink">Features</a></li>
+            <li><a href="#" id="pricingLink">Pricing</a></li>
+            <li><a href="#" id="howItWorksLink">How It Works</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#" class="cta-button">Login</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Remove Backgrounds Like a Pro</h1>
+            <p>Powered by advanced AI, ImageTooling removes backgrounds from images in seconds. Get studio-quality transparent backgrounds with just one click.</p>
+        </div>
+    </section>
+
+    <!-- Upload Section -->
+    <div class="container">
+        <section class="upload-section">
+            <div class="upload-container" id="dropArea">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <div class="upload-text">
+                    <h2>Upload Your Image</h2>
+                    <p>Drag & drop an image here or click to browse files</p>
+                    <button class="browse-button" id="browseButton">Select Image</button>
+                    <input type="file" id="fileInput" accept="image/*">
+                </div>
+            </div>
+
+            <div class="spinner" id="spinner"></div>
+
+            <div class="preview-section" id="previewSection">
+                <h2 class="preview-title">Your Result</h2>
+                <div class="preview-container">
+                    <div class="preview-box">
+                        <h3>Original Image</h3>
+                        <img id="originalPreview" class="image-preview" src="" alt="Original Image">
+                    </div>
+                    <div class="preview-box">
+                        <h3>Background Removed</h3>
+                        <img id="resultPreview" class="image-preview" src="" alt="Result Image">
+                        <button class="download-btn" id="downloadBtn">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose ImageTooling?</h2>
+                <p>Our AI-powered background remover delivers professional results in seconds</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Remove backgrounds in just 5 seconds with our powerful AI technology.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3>Pixel-Perfect</h3>
+                    <p>Get clean, precise cuts with smooth edges around hair and complex objects.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Secure Processing</h3>
+                    <p>Your images are processed securely and automatically deleted after 24 hours.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Custom Backgrounds</h3>
+                    <p>Replace removed backgrounds with colors, gradients, or your own images.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about our service</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle faq-icon"></i>
+                        <span>What types of images work best for background removal?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our AI works best with high-contrast images where the subject is clearly distinguishable from the background. Photos with solid color backgrounds, well-lit subjects, and minimal overlapping elements yield the best results.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle faq-icon"></i>
+                        <span>How do you handle complex elements like hair or fur?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our advanced AI algorithms are specially trained to detect fine details like individual strands of hair or fur. For best results, ensure good lighting and contrast between the subject and background.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle faq-icon"></i>
+                        <span>What file formats do you support?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We support all common image formats including JPG, PNG, WEBP, and GIF. Output is always delivered as PNG with transparent background for maximum quality.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle faq-icon"></i>
+                        <span>Is there a limit to image size or resolution?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Free accounts can process images up to 0.5MP (about 800x600px). Paid plans support up to 12MP (about 4000x3000px). For higher resolutions, contact our enterprise team.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle faq-icon"></i>
+                        <span>How secure is my uploaded content?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>All uploads are encrypted in transit and at rest. Processed images are automatically deleted from our servers after 24 hours. We never use your images for training our AI models.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle faq-icon"></i>
+                        <span>Can I batch process multiple images at once?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Our Professional plan and above support batch processing. You can upload up to 50 images simultaneously depending on your subscription level.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle faq-icon"></i>
+                        <span>What makes ImageTooling different from other background removers?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our proprietary AI delivers superior edge detection, especially for challenging cases like hair, fur, and transparent objects. We also offer more post-processing options and faster processing times than competitors.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle faq-icon"></i>
+                        <span>Do you offer API access for developers?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Our Business and Enterprise plans include API access with comprehensive documentation and client libraries for popular programming languages.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ImageTooling</h3>
+                    <p>The fastest way to remove backgrounds from your images automatically and free.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" id="footerFeaturesLink">Features</a></li>
+                        <li><a href="#" id="footerPricingLink">Pricing</a></li>
+                        <li><a href="#" id="footerHowItWorksLink">How It Works</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">GDPR</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 ImageTooling. All rights reserved.</p>
+            </div>
+        </div>
+          <!-- Builder Credit -->
+  <div class="builder-credit">
+    <span>Website crafted with care by</span>
+    <span class="builder-name">Nitin Sharma</span>
+  </div>
+    </footer>
+
+    <!-- Pricing Popup -->
+    <div class="popup" id="pricingPopup">
+        <div class="popup-content">
+            <button class="popup-close" id="pricingClose">&times;</button>
+            <h2 class="popup-title">Pricing Plans</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="price">$12<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 50 images per month</li>
+                        <li><i class="fas fa-check"></i> HD quality (720p)</li>
+                        <li><i class="fas fa-check"></i> Basic editing tools</li>
+                        <li><i class="fas fa-check"></i> Email support</li>
+                        <li><i class="fas fa-times"></i> No API access</li>
+                    </ul>
+                    <button class="pricing-btn secondary-btn">Get Started</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Professional</h3>
+                    <div class="price">$20<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 200 images per month</li>
+                        <li><i class="fas fa-check"></i> Full HD quality (1080p)</li>
+                        <li><i class="fas fa-check"></i> Advanced editing tools</li>
+                        <li><i class="fas fa-check"></i> Priority email support</li>
+                        <li><i class="fas fa-check"></i> Basic API access</li>
+                    </ul>
+                    <button class="pricing-btn primary-btn">Get Started</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Business</h3>
+                    <div class="price">$35<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 500 images per month</li>
+                        <li><i class="fas fa-check"></i> 4K quality</li>
+                        <li><i class="fas fa-check"></i> Premium editing tools</li>
+                        <li><i class="fas fa-check"></i> 24/7 chat support</li>
+                        <li><i class="fas fa-check"></i> Full API access</li>
+                    </ul>
+                    <button class="pricing-btn secondary-btn">Get Started</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">$50<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Unlimited images</li>
+                        <li><i class="fas fa-check"></i> 4K+ quality</li>
+                        <li><i class="fas fa-check"></i> All premium features</li>
+                        <li><i class="fas fa-check"></i> Dedicated support</li>
+                        <li><i class="fas fa-check"></i> Custom API solutions</li>
+                    </ul>
+                    <button class="pricing-btn secondary-btn">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works Popup -->
+    <div class="popup" id="howItWorksPopup">
+        <div class="popup-content">
+            <button class="popup-back" id="howItWorksBack"><i class="fas fa-arrow-left"></i></button>
+            <button class="popup-close" id="howItWorksClose">&times;</button>
+            <h2 class="popup-title">How It Works</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Upload Your Image</h3>
+                        <p>Simply drag and drop your image file into the upload area or click to browse your files. We support JPG, PNG, and WEBP formats up to 12MP resolution.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>AI Processing</h3>
+                        <p>Our advanced AI analyzes your image to identify the foreground subject and separate it from the background. This typically takes just a few seconds.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Preview & Adjust</h3>
+                        <p>Review the automatically generated result. Use our editing tools to fine-tune the edges or make manual corrections if needed.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Download Your Image</h3>
+                        <p>Download your image with a transparent background or choose from our library of replacement backgrounds. Your processed image is available for 24 hours.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Popup -->
+    <div class="popup" id="featuresPopup">
+        <div class="popup-content">
+            <button class="popup-back" id="featuresBack"><i class="fas fa-arrow-left"></i></button>
+            <button class="popup-close" id="featuresClose">&times;</button>
+            <h2 class="popup-title">Our Features</h2>
+            <div class="features-popup-grid">
+                <div class="feature-popup-card">
+                    <div class="feature-popup-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI-Powered Removal</h3>
+                    <p>Our proprietary AI detects subjects with pixel-perfect precision, even handling complex edges like hair and fur.</p>
+                </div>
+                <div class="feature-popup-card">
+                    <div class="feature-popup-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Process images in just seconds with our optimized AI engine, much faster than manual editing.</p>
+                </div>
+                <div class="feature-popup-card">
+                    <div class="feature-popup-icon">
+                        <i class="fas fa-sliders-h"></i>
+                    </div>
+                    <h3>Advanced Editing</h3>
+                    <p>Fine-tune results with our post-processing tools for perfect edges every time.</p>
+                </div>
+                <div class="feature-popup-card">
+                    <div class="feature-popup-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <h3>Background Library</h3>
+                    <p>Choose from hundreds of professional backgrounds or upload your own custom backdrop.</p>
+                </div>
+                <div class="feature-popup-card">
+                    <div class="feature-popup-icon">
+                        <i class="fas fa-braille"></i>
+                    </div>
+                    <h3>Batch Processing</h3>
+                    <p>Process multiple images at once with our batch upload feature (available on paid plans).</p>
+                </div>
+                <div class="feature-popup-card">
+                    <div class="feature-popup-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Secure Processing</h3>
+                    <p>All uploads are encrypted and automatically deleted after 24 hours for your privacy.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const dropArea = document.getElementById('dropArea');
+            const fileInput = document.getElementById('fileInput');
+            const browseButton = document.getElementById('browseButton');
+            const previewSection = document.getElementById('previewSection');
+            const originalPreview = document.getElementById('originalPreview');
+            const resultPreview = document.getElementById('resultPreview');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const spinner = document.getElementById('spinner');
+            const toast = document.getElementById('toast');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const navLinks = document.getElementById('navLinks');
+            const themeToggle = document.getElementById('themeToggle');
+            
+            // Popup Elements
+            const pricingPopup = document.getElementById('pricingPopup');
+            const pricingLink = document.getElementById('pricingLink');
+            const pricingClose = document.getElementById('pricingClose');
+            const footerPricingLink = document.getElementById('footerPricingLink');
+            
+            const howItWorksPopup = document.getElementById('howItWorksPopup');
+            const howItWorksLink = document.getElementById('howItWorksLink');
+            const howItWorksClose = document.getElementById('howItWorksClose');
+            const howItWorksBack = document.getElementById('howItWorksBack');
+            const footerHowItWorksLink = document.getElementById('footerHowItWorksLink');
+            
+            const featuresPopup = document.getElementById('featuresPopup');
+            const featuresLink = document.getElementById('featuresLink');
+            const featuresClose = document.getElementById('featuresClose');
+            const featuresBack = document.getElementById('featuresBack');
+            const footerFeaturesLink = document.getElementById('footerFeaturesLink');
+            
+            // FAQ Elements
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            // API Key
+            const API_KEY = 'NWC5Wa4UgEKSojtJSCDPkTRW';
+            const API_URL = 'https://api.remove.bg/v1.0/removebg';
+
+            // Theme Toggle
+            themeToggle.addEventListener('click', function() {
+                document.body.setAttribute('data-theme', 
+                    document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+                
+                const icon = this.querySelector('i');
+                if (document.body.getAttribute('data-theme') === 'dark') {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            });
+
+            // Mobile menu toggle
+            mobileMenu.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                this.querySelector('i').classList.toggle('fa-bars');
+                this.querySelector('i').classList.toggle('fa-times');
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (window.innerWidth <= 992 && !e.target.closest('.navbar')) {
+                    navLinks.classList.remove('active');
+                    mobileMenu.querySelector('i').classList.remove('fa-times');
+                    mobileMenu.querySelector('i').classList.add('fa-bars');
+                }
+            });
+
+            // Pricing Popup
+            pricingLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                pricingPopup.classList.add('active');
+            });
+
+            footerPricingLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                pricingPopup.classList.add('active');
+            });
+
+            pricingClose.addEventListener('click', function() {
+                pricingPopup.classList.remove('active');
+            });
+
+            // How It Works Popup
+            howItWorksLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                howItWorksPopup.classList.add('active');
+            });
+
+            footerHowItWorksLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                howItWorksPopup.classList.add('active');
+            });
+
+            howItWorksClose.addEventListener('click', function() {
+                howItWorksPopup.classList.remove('active');
+            });
+
+            howItWorksBack.addEventListener('click', function() {
+                howItWorksPopup.classList.remove('active');
+            });
+
+            // Features Popup
+            featuresLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                featuresPopup.classList.add('active');
+            });
+
+            footerFeaturesLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                featuresPopup.classList.add('active');
+            });
+
+            featuresClose.addEventListener('click', function() {
+                featuresPopup.classList.remove('active');
+            });
+
+            featuresBack.addEventListener('click', function() {
+                featuresPopup.classList.remove('active');
+            });
+
+            // FAQ Toggle
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Close popups when clicking outside content
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('popup')) {
+                    pricingPopup.classList.remove('active');
+                    howItWorksPopup.classList.remove('active');
+                    featuresPopup.classList.remove('active');
+                }
+            });
+
+            // Prevent default drag behaviors
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, preventDefaults, false);
+                document.body.addEventListener(eventName, preventDefaults, false);
+            });
+
+            // Highlight drop area when item is dragged over it
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropArea.addEventListener(eventName, highlight, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, unhighlight, false);
+            });
+
+            // Handle dropped files
+            dropArea.addEventListener('drop', handleDrop, false);
+
+            // Handle file selection via button
+            browseButton.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', handleFiles);
+
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            function highlight() {
+                dropArea.classList.add('drag-over');
+            }
+
+            function unhighlight() {
+                dropArea.classList.remove('drag-over');
+            }
+
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                handleFiles({ target: { files } });
+            }
+
+            function handleFiles(e) {
+                const files = e.target.files;
+                if (files.length) {
+                    const file = files[0];
+                    if (file.type.match('image.*')) {
+                        processImage(file);
+                    } else {
+                        showToast('Please select an image file (JPEG, PNG, etc.)', 'error');
+                    }
+                }
+            }
+
+            function processImage(file) {
+                // Show loading spinner
+                spinner.style.display = 'block';
+                previewSection.style.display = 'none';
+
+                // Display original image preview
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    originalPreview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+
+                // Prepare form data for API
+                const formData = new FormData();
+                formData.append('image_file', file);
+                formData.append('size', 'auto');
+
+                // Call remove.bg API
+                fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'X-Api-Key': API_KEY
+                    },
+                    body: formData
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('API request failed');
+                    }
+                    return response.blob();
+                })
+                .then(blob => {
+                    // Display result
+                    const resultUrl = URL.createObjectURL(blob);
+                    resultPreview.src = resultUrl;
+                    
+                    // Set up download
+                    downloadBtn.onclick = function() {
+                        const a = document.createElement('a');
+                        a.href = resultUrl;
+                        a.download = `background_removed_${Date.now()}.png`;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                    };
+
+                    // Show preview section
+                    previewSection.style.display = 'block';
+                    spinner.style.display = 'none';
+                    
+                    // Scroll to results
+                    previewSection.scrollIntoView({ behavior: 'smooth' });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showToast('Error processing image. Please try again.', 'error');
+                    spinner.style.display = 'none';
+                });
+            }
+
+            function showToast(message, type = '') {
+                toast.textContent = message;
+                toast.className = 'toast';
+                toast.classList.add(type, 'show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
