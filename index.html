@@ -135,6 +135,169 @@
             color: white;
         }
 
+/* ===== Cookie Policy Popup Styles ===== */
+.cookies-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 3000;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.cookies-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Blur effect for background content */
+.cookies-overlay.active~* {
+    filter: blur(5px);
+    transition: filter 0.3s ease;
+    pointer-events: none;
+}
+
+/* Ensure header stays above blur but below popup */
+header {
+    z-index: 2000;
+    position: relative;
+}
+
+/* Popup container - stays sharp */
+.cookies-popup {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    width: 100%;
+    max-width: 800px;
+    padding: 25px;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    position: relative;
+    filter: none !important;
+    z-index: 3001;
+    margin: 0 auto;
+}
+
+.cookies-overlay.active .cookies-popup {
+    transform: translateY(0);
+}
+
+/* Popup content styles */
+.cookies-popup h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.cookies-popup p {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.cookies-popup a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.cookies-popup a:hover {
+    text-decoration: underline;
+}
+
+/* Button styles */
+.cookies-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.cookies-btn {
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    flex: 1;
+    min-width: 150px;
+    text-align: center;
+}
+
+.cookies-accept {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.cookies-accept:hover {
+    background-color: #5649c0;
+}
+
+.cookies-reject {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.cookies-reject:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.cookies-settings {
+    background-color: transparent;
+    border: 2px solid var(--text-color);
+    color: var(--text-color);
+}
+
+.cookies-settings:hover {
+    background-color: var(--text-color);
+    color: var(--card-bg);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .cookies-popup {
+        padding: 20px 15px;
+        border-radius: 10px 10px 0 0;
+    }
+    
+    .cookies-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .cookies-btn {
+        width: 100%;
+        padding: 10px 15px;
+    }
+    
+    .cookies-popup h2 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cookies-popup {
+        padding: 15px 10px;
+    }
+    
+    .cookies-popup h2 {
+        font-size: 18px;
+    }
+    
+    .cookies-popup p {
+        font-size: 14px;
+    }
+}
+
 /* Mobile menu button - always visible on mobile */
         .mobile-menu {
             display: none; /* Hidden by default on desktop */
@@ -810,7 +973,7 @@
         }
         .builder-name {
             font-weight: 600;
-            color: darkcyan;
+            color: #6c5ce7;
             margin-top: 5px;
             display: block;
             font-size: 15px;
@@ -942,6 +1105,7 @@
                 margin-right: 0;
             }
         }
+        
     </style>
 </head>
 <body>
@@ -1066,7 +1230,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Frequently Asked Questions</h2>
-                <p>Find answers to common questions about our service</p>
+                <p>Find styles to common questions about our service</p>
             </div>
             <div class="faq-container">
                 <div class="faq-item">
@@ -1172,7 +1336,7 @@
                 <div class="footer-column">
                     <h3>Product</h3>
                     <ul class="footer-links">
-                        <li><a href="#" id="footerFeaturesLink">Features</a></li>
+                        <li><a href="" id="footerFeaturesLink">Features</a></li>
                         <li><a href="#" id="footerPricingLink">Pricing</a></li>
                         <li><a href="#" id="footerHowItWorksLink">How It Works</a></li>
                         <li><a href="#faq">FAQ</a></li>
@@ -1181,19 +1345,19 @@
                 <div class="footer-column">
                     <h3>Company</h3>
                     <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="About Us.html">About Us</a></li>
+                        <li><a href="Careers.html">Careers</a></li>
+                        <li><a href="Blog.html">Blog</a></li>
+                        <li><a href="Contact Us.html">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Legal</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Cookie Policy</a></li>
-                        <li><a href="#">GDPR</a></li>
+                        <li><a href="Terms of Service.html">Terms of Service</a></li>
+                        <li><a href="Privacy Policy.html">Privacy Policy</a></li>
+                        <li><a href="Cookie Policy.html">Cookie Policy</a></li>
+                        <li><a href="GDPR.html">GDPR</a></li>
                     </ul>
                 </div>
             </div>
@@ -1358,6 +1522,7 @@
             </div>
         </div>
     </div>
+    
 
     <!-- Toast Notification -->
     <div class="toast" id="toast"></div>
@@ -1628,5 +1793,74 @@
             }
         });
     </script>
+    
+    <script>
+        
+    // Cookies Policy Popup
+    document.addEventListener('DOMContentLoaded', function() {
+        const cookiesOverlay = document.getElementById('cookiesOverlay');
+        const cookiesAccept = document.getElementById('cookiesAccept');
+        const cookiesReject = document.getElementById('cookiesReject');
+        const cookiesSettings = document.getElementById('cookiesSettings');
+        
+        // Check if cookies preference is already set
+        const cookiesAccepted = localStorage.getItem('cookiesAccepted');
+        
+        if (cookiesAccepted === null) {
+            // Show cookies popup if no preference is set
+            setTimeout(() => {
+                document.body.classList.add('cookies-blur');
+                cookiesOverlay.classList.add('active');
+            }, 1000);
+            
+            // Disable scrolling
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Handle accept button
+        cookiesAccept.addEventListener('click', function() {
+            localStorage.setItem('cookiesAccepted', 'true');
+            closeCookiesPopup();
+        });
+        
+        // Handle reject button
+        cookiesReject.addEventListener('click', function() {
+            localStorage.setItem('cookiesAccepted', 'false');
+            closeCookiesPopup();
+        });
+        
+        // Handle settings button (you can expand this functionality)
+        cookiesSettings.addEventListener('click', function() {
+            // For now, just treat it as reject
+            localStorage.setItem('cookiesAccepted', 'false');
+            closeCookiesPopup();
+            // In a real implementation, you would show detailed cookie settings
+        });
+        
+        function closeCookiesPopup() {
+            cookiesOverlay.classList.remove('active');
+            document.body.classList.remove('cookies-blur');
+            document.body.style.overflow = '';
+            
+            // Remove the overlay from DOM after animation completes
+            setTimeout(() => {
+                cookiesOverlay.style.display = 'none';
+            }, 300);
+        }
+    });
+
+    </script>
+    <!-- Cookies Policy Popup -->
+<div class="cookies-overlay" id="cookiesOverlay">
+    <div class="cookies-popup">
+        <h2>We Value Your Privacy</h2>
+        <p>We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies. You can manage your preferences in "Cookie Settings" or reject non-essential cookies by clicking "Reject All". Learn more in our <a href="Cookie Policy.html">Cookie Policy</a>.</p>
+        <div class="cookies-buttons">
+            <button class="cookies-btn cookies-accept" id="cookiesAccept">Accept All</button>
+            <button class="cookies-btn cookies-settings" id="cookiesSettings">Cookie Settings</button>
+            <button class="cookies-btn cookies-reject" id="cookiesReject">Reject All</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>
