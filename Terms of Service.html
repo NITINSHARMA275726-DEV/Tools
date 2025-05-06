@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service | ImageTooling</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #a29bfe;
+            --dark-color: #2d3436;
+            --light-color: #f5f6fa;
+            --success-color: #00b894;
+            --warning-color: #fdcb6e;
+            --error-color: #d63031;
+            --bg-color: #f5f6fa;
+            --text-color: #2d3436;
+            --card-bg: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #f5f6fa;
+            --card-bg: #2d2d2d;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --dark-color: #f5f6fa;
+            --light-color: #2d2d2d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px var(--shadow-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 180px 0 100px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-title h1 {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .page-title p {
+            font-size: 20px;
+            color: var(--text-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Terms Content */
+        .terms-container {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 50px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            margin-bottom: 80px;
+        }
+
+        .terms-section {
+            margin-bottom: 40px;
+        }
+
+        .terms-section h2 {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .terms-section h3 {
+            font-size: 22px;
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+        }
+
+        .terms-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .terms-section ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .terms-section li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background-color: rgba(108, 92, 231, 0.1);
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .update-date {
+            font-style: italic;
+            color: var(--secondary-color);
+            text-align: right;
+            margin-top: 30px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--light-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #b2bec3;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #4a5355;
+            color: #b2bec3;
+            font-size: 14px;
+        }
+
+        /* Builder Credit */
+        .builder-credit {
+            text-align: center;
+            margin: 40px auto;
+            padding: 15px;
+            max-width: 300px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+            color: #666;
+            font-size: 14px;
+        }
+        .builder-name {
+            font-weight: 600;
+            color: darkcyan;
+            margin-top: 5px;
+            display: block;
+            font-size: 15px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .terms-container {
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-title h1 {
+                font-size: 36px;
+            }
+
+            .page-title p {
+                font-size: 18px;
+            }
+
+            .terms-section h2 {
+                font-size: 24px;
+            }
+
+            .terms-section h3 {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-content {
+                padding: 150px 0 80px;
+            }
+
+            .page-title h1 {
+                font-size: 28px;
+            }
+
+            .terms-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-magic"></i>
+                    ImageTooling
+                </a>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="page-title">
+                <h1>Terms of Service</h1>
+                <p>Last updated: June 15, 2023</p>
+            </div>
+
+            <div class="terms-container">
+                <div class="terms-section">
+                    <h2>1. Acceptance of Terms</h2>
+                    <p>By accessing or using the ImageTooling website ("Service"), you agree to be bound by these Terms of Service ("Terms"). If you disagree with any part of the terms, you may not access the Service.</p>
+                    
+                    <div class="highlight">
+                        <p><strong>Important:</strong> These Terms govern your use of our Service. Please read them carefully before using ImageTooling.</p>
+                    </div>
+                </div>
+
+                <div class="terms-section">
+                    <h2>2. Description of Service</h2>
+                    <p>ImageTooling provides an online platform for automatic background removal and image editing through artificial intelligence technology. The Service may include:</p>
+                    <ul>
+                        <li>Background removal from images</li>
+                        <li>Image enhancement tools</li>
+                        <li>Background replacement options</li>
+                        <li>Batch processing capabilities</li>
+                        <li>API access for developers</li>
+                    </ul>
+                    <p>We reserve the right to modify or discontinue the Service at any time without notice.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>3. User Accounts</h2>
+                    <h3>3.1 Account Creation</h3>
+                    <p>To access certain features, you may need to create an account. You agree to provide accurate and complete information and keep this information updated.</p>
+                    
+                    <h3>3.2 Account Security</h3>
+                    <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.</p>
+                    
+                    <h3>3.3 Account Termination</h3>
+                    <p>We reserve the right to suspend or terminate accounts that violate these Terms or engage in illegal or harmful activities.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>4. User Responsibilities</h2>
+                    <p>When using our Service, you agree not to:</p>
+                    <ul>
+                        <li>Upload or process illegal, harmful, or offensive content</li>
+                        <li>Violate intellectual property rights</li>
+                        <li>Use automated systems to access the Service excessively</li>
+                        <li>Attempt to reverse engineer or hack our systems</li>
+                        <li>Use the Service for any unlawful purpose</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h2>5. Intellectual Property</h2>
+                    <h3>5.1 Your Content</h3>
+                    <p>You retain ownership of any images you upload to our Service. By uploading content, you grant us a limited license to process your images solely to provide the Service.</p>
+                    
+                    <h3>5.2 Our Content</h3>
+                    <p>All software, technology, designs, and content provided by ImageTooling are owned by or licensed to us and protected by intellectual property laws.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>6. Payments and Subscriptions</h2>
+                    <h3>6.1 Free Tier</h3>
+                    <p>We offer a free tier with limited features. The free tier may be subject to usage limits and watermarks on processed images.</p>
+                    
+                    <h3>6.2 Paid Plans</h3>
+                    <p>Paid subscription plans are billed in advance on a recurring basis. You may cancel at any time, but refunds are not provided for partial billing periods.</p>
+                    
+                    <h3>6.3 Price Changes</h3>
+                    <p>We may change our pricing with 30 days notice. Existing subscriptions will maintain their current pricing until the next billing cycle.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>7. Limitation of Liability</h2>
+                    <p>ImageTooling shall not be liable for any indirect, incidental, special, consequential or punitive damages resulting from:</p>
+                    <ul>
+                        <li>Your use or inability to use the Service</li>
+                        <li>Unauthorized access to or alteration of your data</li>
+                        <li>Any content or conduct of any third party on the Service</li>
+                    </ul>
+                    <p>Our total liability for any claims shall not exceed the amount you paid us in the past 12 months.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>8. Privacy</h2>
+                    <p>Your privacy is important to us. Please review our <a href="privacy.html" style="color: var(--primary-color);">Privacy Policy</a> which explains how we collect, use, and protect your personal information.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>9. Modifications to Terms</h2>
+                    <p>We may revise these Terms at any time. The most current version will always be posted on our website. By continuing to use the Service after changes become effective, you agree to be bound by the revised Terms.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>10. Governing Law</h2>
+                    <p>These Terms shall be governed by the laws of the State of California without regard to its conflict of law provisions.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>11. Contact Information</h2>
+                    <p>For questions about these Terms, please contact us at:</p>
+                    <p>ImageTooling Inc.<br>
+                    1234 Design Street, Suite 567<br>
+                    San Francisco, CA 94107<br>
+                    Email: <a href="mailto:help.imagetooling@gmail.com" style="color: var(--primary-color);">help.imagetooling@gmail.com</a></p>
+                </div>
+
+                <div class="update-date">
+                    <p>Last updated: June 15, 2023</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ImageTooling</h3>
+                    <p>The fastest way to remove backgrounds from your images automatically and free.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="index.html#pricing">Pricing</a></li>
+                        <li><a href="index.html#how-it-works">How It Works</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="cookie.html">Cookie Policy</a></li>
+                        <li><a href="gdpr.html">GDPR</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 ImageTooling. All rights reserved.</p>
+            </div>
+        </div>
+        <!-- Builder Credit -->
+        <div class="builder-credit">
+            <span>Website crafted with care by</span>
+            <span class="builder-name">Nitin Sharma</span>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme Toggle
+            const themeToggle = document.getElementById('themeToggle');
+            
+            themeToggle.addEventListener('click', function() {
+                document.body.setAttribute('data-theme', 
+                    document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+                
+                const icon = this.querySelector('i');
+                if (document.body.getAttribute('data-theme') === 'dark') {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
